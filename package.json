@@ -1,5 +1,5 @@
 {
-  "name": "tool-library-template",
+  "name": "tree-buisiness-helper",
   "version": "0.0.2",
   "jsnext:source": "./src/index.ts",
   "types": "./dist/types/index.d.ts",
