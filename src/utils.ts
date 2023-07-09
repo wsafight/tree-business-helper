@@ -1,4 +1,5 @@
 import { TreeKey } from './interface';
+import { INVISIBLE_CHAR } from './constant';
 
 /**
  * 检测错误并抛出
@@ -9,6 +10,22 @@ export const invariant = (condition: boolean, errorMsg: string) => {
   if (condition) {
     throw new Error(errorMsg);
   }
+};
+
+interface GetLabelWithLevel {
+  label?: string;
+  level?: number;
+  split?: string;
+}
+
+export const getLabelWithLevel = (
+  { label = '', level = 0, split = INVISIBLE_CHAR }: GetLabelWithLevel = {
+    label: '',
+    level: 0,
+    split: INVISIBLE_CHAR,
+  },
+): string => {
+  return `${split.repeat(level)}${label}`;
 };
 
 interface GetFixParamsForStringParams {

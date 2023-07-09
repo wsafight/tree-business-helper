@@ -12,9 +12,12 @@ export interface TreeNode {
 export interface TreeOptions {
   idKey: string;
   parentIdKey: string;
-  labelKey: string;
   childrenKey: string;
   isLeafItem?: (node: TreeItem) => boolean;
+}
+
+export interface ComplexTreeOptions extends TreeOptions {
+  labelKey?: string;
 }
 
 export type ItemMappingFun = (item: TreeItem) => TreeItem;
@@ -22,6 +25,11 @@ export type ItemMappingFun = (item: TreeItem) => TreeItem;
 export interface TreeParams {
   items: TreeItem[];
   options?: Partial<TreeOptions>;
+}
+
+export interface ComplexTreeParams {
+  items: TreeItem[];
+  options?: Partial<ComplexTreeOptions>;
 }
 
 export interface TreeShapeItem {

@@ -16,8 +16,6 @@ class TreeHelper implements TreeOptions {
 
   readonly childrenKey: string = 'children';
 
-  readonly labelKey: string = 'name';
-
   protected readonly nodeById: Map<TreeKey, TreeNode> = new Map();
 
   protected readonly rootNodes: TreeNode[] = [];
@@ -28,14 +26,13 @@ class TreeHelper implements TreeOptions {
       options: { ...DEFAULT_OPTIONS },
     },
   ) {
-    const { idKey, parentIdKey, childrenKey, isLeafItem, labelKey } = {
+    const { idKey, parentIdKey, childrenKey, isLeafItem } = {
       ...DEFAULT_OPTIONS,
       ...options,
     };
 
     this.idKey = idKey!;
     this.parentIdKey = parentIdKey!;
-    this.labelKey = labelKey!;
     this.childrenKey = childrenKey!;
 
     if (isLeafItem && typeof isLeafItem === 'function') {

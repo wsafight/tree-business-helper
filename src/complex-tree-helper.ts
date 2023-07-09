@@ -1,19 +1,21 @@
 import { TreeHelper } from './tree-helper';
-import { DEFAULT_OPTIONS } from './constant';
+import { COMPLEX_TREE_OPTIONS, DEFAULT_OPTIONS } from './constant';
 import {
   TreeItem,
   TreeNode,
-  TreeOptions,
-  TreeParams,
+  ComplexTreeOptions,
   TreeShapeItem,
+  ComplexTreeParams,
 } from './interface';
-import { invariant } from './utils';
+import { getLabelWithLevel, invariant } from './utils';
 
-class ComplexTreeHelper extends TreeHelper implements TreeOptions {
+class ComplexTreeHelper extends TreeHelper implements ComplexTreeOptions {
+  readonly labelKey: string = 'name';
+
   constructor(
-    { items, options }: TreeParams = {
+    { items, options }: ComplexTreeParams = {
       items: [],
-      options: { ...DEFAULT_OPTIONS },
+      options: { ...COMPLEX_TREE_OPTIONS },
     },
   ) {
     super({
@@ -23,6 +25,10 @@ class ComplexTreeHelper extends TreeHelper implements TreeOptions {
         ...options,
       },
     });
+
+    if (typeof options?.labelKey === 'string' && options.labelKey.length) {
+      this.labelKey = options?.labelKey;
+    }
   }
 
   filter(
@@ -75,8 +81,7 @@ class ComplexTreeHelper extends TreeHelper implements TreeOptions {
         value,
         level,
         disabled: false,
-        // eslint-disable-next-line no-irregular-whitespace
-        labelWithLevel: `${'　'.repeat(level)}${label}`,
+        labelWithLevel: getLabelWithLevel({ label, level }),
       };
 
       if (disableProp) {
